@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
 import { IconifyIcon, routes } from "@/util/routes";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {

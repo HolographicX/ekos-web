@@ -53,9 +53,9 @@
 </template>
 
 <script>
+import LastNotification from "@/components/common/LastNotification.vue";
+import { dms, hms } from "@/util/coords";
 import { mapGetters, mapState } from "vuex";
-import { hms, dms } from "@/util/coords";
-import LastNotification from "@/components/common/LastNotification"
 
 export default {
   components: {

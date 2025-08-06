@@ -3,7 +3,7 @@
     <div class="text-h4">Mount</div>
     <v-divider class="mb-2"></v-divider>
     <div class="text-h6">{{mount.status}}</div>
-    <skymap :center="mountPosition"></skymap>
+    <SkyMap :center="mountPosition"></SkyMap>
     <LastNotification />
     <v-divider class="mb-2"></v-divider>
     <v-list>
@@ -26,13 +26,13 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
-import skymap from "@/components/SkyMap";
-import LastNotification from "@/components/common/LastNotification"
+import SkyMap from "@/components/SkyMap.vue";
+import LastNotification from "@/components/common/LastNotification.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   components: {
-    skymap,
+    SkyMap,
     LastNotification,
   },
   computed: {

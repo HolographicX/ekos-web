@@ -66,7 +66,7 @@
   </div>
 </template>
 <script>
-import LastNotification from "@/components/common/LastNotification";
+import LastNotification from "@/components/common/LastNotification.vue";
 import target from "@iconify/icons-mdi/target";
 import { Icon, addIcon } from '@iconify/vue';
 import { mapActions, mapState } from "vuex";
