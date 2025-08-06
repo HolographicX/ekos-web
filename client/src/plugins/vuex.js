@@ -1,7 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
 import { buildDevice } from '@/util/device';
+import { createStore } from 'vuex';
+
 
 import {
   ALIGN_SOLVE,
@@ -28,6 +27,8 @@ import {
   GUIDE_START,
   GUIDE_STOP,
   IMAGE_DATA,
+  LIVESTACK_IMAGE,
+  LIVESTACK_LOG,
   MOUNT_ABORT,
   MOUNT_PARK,
   MOUNT_SET_TRACKING,
@@ -46,11 +47,8 @@ import {
   OPTION_SET_NOTIFICATIONS,
   SET_CLIENT_STATE,
   START_PROFILE,
-  LIVESTACK_IMAGE,
-  LIVESTACK_LOG,
 } from '../util/messageTypes';
 
-Vue.use(Vuex);
 
 const defaultEkosStates = {
   preview: {
@@ -90,7 +88,7 @@ const defaultEkosStates = {
   },
 };
 
-export default new Vuex.Store({
+const store = createStore({
   state: {
     socket: {
       isConnected: false,
@@ -136,7 +134,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SOCKET_ONOPEN(state, event) {
-      Vue.prototype.$socket = event.currentTarget
+      state.socket.connection = event.currentTarget;
       state.socket.isConnected = true
     },
     SOCKET_ONCLOSE(state) {
@@ -209,7 +207,7 @@ export default new Vuex.Store({
           // Still connected to KStars, but Ekos was closed. Reset states to default.
 
           Object.keys(defaultEkosStates).forEach(k => {
-            Vue.set(state, k, defaultEkosStates[k]);
+            state.k = defaultEkosStates[k];
           });
 
           this.dispatch("sendMessage", { type: GET_PROFILES });
@@ -265,7 +263,7 @@ export default new Vuex.Store({
 
       state.filter_wheels.forEach(fw => {
         if (fw.name === state.capture.settings.fw) {
-          Vue.set(state, 'filters', [...fw.filters]);
+          state.filters= [...fw.filters];
         }
       });
     },
@@ -274,7 +272,7 @@ export default new Vuex.Store({
       for (const key in message.payload) {
         cameras.push(JSON.parse(JSON.stringify(message.payload[key])));
       }
-      Vue.set(state, 'cameras', cameras);
+      state.cameras = cameras;
     },
     [GET_FILTER_WHEELS](state, message) {
       const filter_wheels = [];
@@ -283,13 +281,13 @@ export default new Vuex.Store({
         const item = message.payload[key];
 
         if (state.capture.settings && state.capture.settings.fw && state.capture.settings.fw === item.name) {
-          Vue.set(state, 'filters', [...item.filters]);
+          state.filters = [...item.filters];
         }
 
         filter_wheels.push(JSON.parse(JSON.stringify(item)));
       }
 
-      Vue.set(state, 'filter_wheels', filter_wheels);
+      state.filter_wheels = filter_wheels;
     },
     [GET_DEVICES](state, message) {
       for (const key in message.payload) {
@@ -299,10 +297,10 @@ export default new Vuex.Store({
     },
     [DEVICE_GET](state, message) {
       const device = buildDevice(message.payload);
-      Vue.set(state.devices, device.name, device);
+      state.devices[device.name] = device;
     },
     [GET_PROFILES](state, message) {
-      Vue.set(state, 'profiles', [...message.payload.profiles]);
+      state.profiles = [...message.payload.profiles];
     },
     [LIVESTACK_LOG](state, message) {
       const msg = { ts: new Date(), message: message.payload }
@@ -313,8 +311,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    sendMessage: (context, message) => {
-      Vue.prototype.$socket.send(JSON.stringify(message))
+    sendMessage: ({ state }, message) => {
+      state.socket.connection?.send(JSON.stringify(message));
     },
     mountPark: ({ dispatch }) => {
       dispatch('sendMessage', { type: MOUNT_PARK });
@@ -377,3 +375,6 @@ export default new Vuex.Store({
     },
   }
 });
+
+
+export default store;

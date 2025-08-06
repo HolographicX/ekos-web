@@ -1,13 +1,18 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import 'vuetify/styles'; // Vuetify 3 uses CSS variables
 
-Vue.use(Vuetify)
-
-const opts = {
+const vuetify = createVuetify({
   theme: {
-    dark: true,
+    defaultTheme: 'dark',
   },
-}
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+})
 
-export default new Vuetify(opts)
+export default vuetify

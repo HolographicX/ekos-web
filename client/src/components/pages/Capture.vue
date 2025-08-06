@@ -66,17 +66,17 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
 import LastNotification from "@/components/common/LastNotification";
-import IconifyIcon from "@iconify/vue";
 import target from "@iconify/icons-mdi/target";
+import { Icon, addIcon } from '@iconify/vue';
+import { mapActions, mapState } from "vuex";
 
-IconifyIcon.addIcon("target", target);
+addIcon('target', target);
 
 export default {
   components: {
     LastNotification,
-    IconifyIcon,
+    IconifyIcon: Icon,
   },
   data() {
     return {

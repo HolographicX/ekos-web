@@ -1,23 +1,22 @@
-import Vue from 'vue'
-import vuetify from '@/plugins/vuetify'
-import VueNativeSock from 'vue-native-websocket'
-import store from '@/plugins/vuex';
-
+import { createApp } from 'vue'
 import App from './App.vue'
-import router from '@/plugins/router'
 
-Vue.use(VueNativeSock, 'ws://' + window.location.hostname + ':3000/interface', {
+import router from '@/plugins/router'
+import vuetify from '@/plugins/vuetify'
+import store from '@/plugins/vuex'
+
+import VueNativeSock from 'vue-native-websocket-vue3'
+
+const app = createApp(App)
+
+app.use(VueNativeSock, 'ws://' + window.location.hostname + ':3000/interface', {
   reconnection: true,
   store: store,
   format: 'json',
-});
+})
 
-Vue.config.productionTip = false;
+app.use(vuetify)
+app.use(store)
+app.use(router)
 
-new Vue({
-  el: "#app",
-  vuetify,
-  store,
-  router,
-  render: h => h(App),
-}).$mount('#app');
+app.mount('#app')

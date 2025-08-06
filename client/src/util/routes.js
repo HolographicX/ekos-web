@@ -1,33 +1,33 @@
+import Align from '@/components/pages/Align.vue'
+import Capture from '@/components/pages/Capture.vue'
+import Focus from '@/components/pages/Focus.vue'
+import Guide from '@/components/pages/Guide.vue'
+import LiveStack from '@/components/pages/LiveStack.vue'
+import Logs from '@/components/pages/Logs.vue'
 import Main from '@/components/pages/Main.vue'
 import Mount from '@/components/pages/Mount.vue'
-import Capture from '@/components/pages/Capture.vue'
-import Align from '@/components/pages/Align.vue'
-import Guide from '@/components/pages/Guide.vue'
-import Focus from '@/components/pages/Focus.vue'
-import Logs from '@/components/pages/Logs.vue'
-import LiveStack from '@/components/pages/LiveStack.vue'
 //import ControlPanel from '@/components/pages/ControlPanel.vue'
 
-import IconifyIcon from "@iconify/vue";
-import telescope from "@iconify/icons-mdi/telescope";
-import target from "@iconify/icons-mdi/target";
-import home from "@iconify/icons-mdi/home";
-import camera from "@iconify/icons-mdi/camera";
-import compass from "@iconify/icons-mdi/compass";
-import magnify from "@iconify/icons-mdi/magnify";
-import comment from "@iconify/icons-mdi/comment";
-import cloud from "@iconify/icons-mdi/cloud";
-import cogs from "@iconify/icons-mdi/cogs";
+import camera from "@iconify/icons-mdi/camera"
+import cloud from "@iconify/icons-mdi/cloud"
+import cogs from "@iconify/icons-mdi/cogs"
+import comment from "@iconify/icons-mdi/comment"
+import compass from "@iconify/icons-mdi/compass"
+import home from "@iconify/icons-mdi/home"
+import magnify from "@iconify/icons-mdi/magnify"
+import target from "@iconify/icons-mdi/target"
+import telescope from "@iconify/icons-mdi/telescope"
+import { Icon, addIcon } from "@iconify/vue"
 
-IconifyIcon.addIcon("telescope", telescope);
-IconifyIcon.addIcon("target", target);
-IconifyIcon.addIcon("home", home);
-IconifyIcon.addIcon("camera", camera);
-IconifyIcon.addIcon("compass", compass);
-IconifyIcon.addIcon("magnify", magnify);
-IconifyIcon.addIcon("comment", comment);
-IconifyIcon.addIcon("cloud", cloud);
-IconifyIcon.addIcon("cogs", cogs);
+addIcon("telescope", telescope);
+addIcon("target", target);
+addIcon("home", home);
+addIcon("camera", camera);
+addIcon("compass", compass);
+addIcon("magnify", magnify);
+addIcon("comment", comment);
+addIcon("cloud", cloud);
+addIcon("cogs", cogs);
 
 const routes = [{
   name: "Main",
@@ -78,6 +78,5 @@ const routes = [{
 }*/];
 
 export {
-  routes,
-  IconifyIcon,
-};
+  Icon as IconifyIcon, routes
+}
