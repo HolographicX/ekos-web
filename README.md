@@ -46,7 +46,6 @@ You need node.js installed to run manually.
 cd client
 npm install
 npm run build
-cp -r dist/ ../server/static
 cd ../server
 npm install
 node index.js
@@ -79,3 +78,12 @@ Here are a few more shots with examples.
 ![ekos-web](docs/guide.png)
 ![ekos-web](docs/mount.png)
 ![ekos-web](docs/logs.png)
+
+# Development
+
+To run dev server with vite:
+```bash
+cd client
+npm install
+npm run dev
+```
